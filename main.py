@@ -143,10 +143,10 @@ def event_loop():
                 # print data
                 audio += data
 
-        try:
-            event_loop()
-        except KeyboardInterrupt: # If Ctrl+C pressed, pass back to main body - which then finishes and alerts the user the program has ended
-                pass
+    try:
+        event_loop()
+    except KeyboardInterrupt: # If Ctrl+C pressed, pass back to main body - which then finishes and alerts the user the program has ended
+            pass
 
 if __name__ == "__main__": # Run when program is called (won't run if you decide to import this program)
     while alexa_helper.internet_on() == False:
