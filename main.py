@@ -113,7 +113,7 @@ def event_loop():
     l, data = inp.read()
     if l:
         # audio += data
-        # print data
+        print str(len(data))
         a = numpy.fromstring(data, dtype='int16') # Converts audio data to a list of integers
         loudness = int(numpy.abs(a).mean()) # Loudness is mean of amplitude of sound wave - average "loudness"
         set_display(loudness) # Set the display to show this "loudness"
