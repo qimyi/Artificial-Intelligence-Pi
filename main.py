@@ -116,7 +116,7 @@ def event_loop():
         loudness = int(numpy.abs(a).mean()) # Loudness is mean of amplitude of sound wave - average "loudness"
         set_display(loudness) # Set the display to show this "loudness"
         # print "\n Loudness:" + str(loudness)
-        rms = sum(numpy.abs([x - a.mean() for x in a]))
+        rms = sum(numpy.abs([x - a.mean() for x in a])) / 1024
         print "\nRMS: " + str(rms)
         try:
             event_loop()
