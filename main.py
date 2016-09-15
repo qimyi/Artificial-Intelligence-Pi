@@ -95,6 +95,7 @@ def continue_pressed():
         a = numpy.fromstring(data, dtype='int16') # Converts audio data to a list of integers
         loudness = int(numpy.abs(a).mean()) # Loudness is mean of amplitude of sound wave - average "loudness"
         set_display(loudness) # Set the display to show this "loudness"
+        print "\n Loudness" + str(loudness)
 
 # Event handler for button
 def handle_enter(pressed):
