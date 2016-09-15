@@ -137,7 +137,7 @@ def event_loop():
             if frame_rms.mean() < 300:
                 print "\nStop recording..."
                 isRecording = False
-                release_button()
+                # release_button()
             else:
                 print "\nContinue recording..."
                 audio += data
