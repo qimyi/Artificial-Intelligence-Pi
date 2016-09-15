@@ -111,7 +111,7 @@ def handle_enter(pressed):
 def event_loop():
     global audio, inp, frame_rms, short_term_rms, isRecording
     l, data = inp.read()
-    if (len(data) % 4 == 0) & (len(data) > 0):
+    if l:
         # audio += data
         # print str(len(data))
         a = numpy.fromstring(data, dtype='int16') # Converts audio data to a list of integers
@@ -124,8 +124,8 @@ def event_loop():
         short_term_rms = numpy.delete(numpy.append(short_term_rms, rms), 0)
 
         # print "\nRMS: " + str(rms)
-        print "\nframe RMS: " + str(frame_rms.mean())
-        print "\nshort frame RMS: " + str(short_term_rms.mean())
+        # print "\nframe RMS: " + str(frame_rms.mean())
+        # print "\nshort frame RMS: " + str(short_term_rms.mean())
 
         if not isRecording:
             if short_term_rms.mean() > 1000:
