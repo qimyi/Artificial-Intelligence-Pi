@@ -69,6 +69,10 @@ def release_button():
     sense.clear() # Clear display
     # inp = None
     audio = ""
+    try:
+        event_loop()
+    except KeyboardInterrupt: # If Ctrl+C pressed, pass back to main body - which then finishes and alerts the user the program has ended
+            pass
 
 # When button is pressed, start recording
 def press_button():
@@ -133,6 +137,10 @@ def event_loop():
                 isRecording = True
                 frame_rms = numpy.ones(20) * 1000
                 audio += data
+            try:
+                event_loop()
+            except KeyboardInterrupt: # If Ctrl+C pressed, pass back to main body - which then finishes and alerts the user the program has ended
+                    pass
         else:
             if frame_rms.mean() < 800:
                 print "\nStop recording..."
@@ -142,11 +150,10 @@ def event_loop():
                 print "\nContinue recording..."
                 # print data
                 audio += data
-
-    try:
-        event_loop()
-    except KeyboardInterrupt: # If Ctrl+C pressed, pass back to main body - which then finishes and alerts the user the program has ended
-            pass
+                try:
+                    event_loop()
+                except KeyboardInterrupt: # If Ctrl+C pressed, pass back to main body - which then finishes and alerts the user the program has ended
+                        pass
 
 if __name__ == "__main__": # Run when program is called (won't run if you decide to import this program)
     while alexa_helper.internet_on() == False:
