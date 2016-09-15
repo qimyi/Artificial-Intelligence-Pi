@@ -108,7 +108,7 @@ def handle_enter(pressed):
 
 # Continually loops for events, if event detected and is the middle joystick button, call upon event handler above
 def event_loop():
-    global audio, inp, frame_rms, short_term_rms
+    global audio, inp, frame_rms, short_term_rms, isRecording
     l, data = inp.read()
     if l:
         # audio += data
