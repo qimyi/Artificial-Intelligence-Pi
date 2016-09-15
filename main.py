@@ -113,7 +113,7 @@ def event_loop():
     l, data = inp.read()
     if l:
         # audio += data
-        print data
+        # print data
         a = numpy.fromstring(data, dtype='int16') # Converts audio data to a list of integers
         loudness = int(numpy.abs(a).mean()) # Loudness is mean of amplitude of sound wave - average "loudness"
         set_display(loudness) # Set the display to show this "loudness"
@@ -137,7 +137,7 @@ def event_loop():
             if frame_rms.mean() < 300:
                 print "\nStop recording..."
                 isRecording = False
-                # release_button()
+                release_button()
             else:
                 print "\nContinue recording..."
                 audio += data
