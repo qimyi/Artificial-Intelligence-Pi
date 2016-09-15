@@ -120,8 +120,13 @@ def event_loop():
 
         frame_rms = numpy.delete(numpy.append(frame_rms, rms), 0)
 
-        print "\nRMS: " + str(rms)
-        print "\nframe RMS: " + str(frame_rms.mean())
+        # print "\nRMS: " + str(rms)
+        # print "\nframe RMS: " + str(frame_rms.mean())
+
+        if frame_rms.mean() > 300
+            print "\nContinue recording..."
+        else:
+            print "\nStop recording..."
 
         try:
             event_loop()
