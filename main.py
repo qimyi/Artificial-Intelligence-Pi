@@ -122,6 +122,7 @@ def event_loop():
 
         # print "\nRMS: " + str(rms)
         # print "\nframe RMS: " + str(frame_rms.mean())
+        print "\nshort frame RMS: " + str(short_term_rms.mean())
 
         if frame_rms.mean() > 300:
             print "\nContinue recording..."
@@ -140,8 +141,9 @@ if __name__ == "__main__": # Run when program is called (won't run if you decide
     path = os.path.realpath(__file__).rstrip(os.path.basename(__file__))
     os.system('mpg123 -q {}hello.mp3'.format(path, path)) # Say hello!
 
-    global frame_rms
+    global frame_rms, short_term_rms
     frame_rms = numpy.zeros(20)
+    short_term_rms = numpy.zeros(3)
     try:
             inp = alsaaudio.PCM(alsaaudio.PCM_CAPTURE, alsaaudio.PCM_NORMAL, alexa_helper.device)
     except alsaaudio.ALSAAudioError:
