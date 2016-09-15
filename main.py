@@ -109,16 +109,8 @@ def handle_enter(pressed):
 # Continually loops for events, if event detected and is the middle joystick button, call upon event handler above
 def event_loop():
     global audio, inp
-    try:
-        inp = alsaaudio.PCM(alsaaudio.PCM_CAPTURE, alsaaudio.PCM_NORMAL, alexa_helper.device)
-    except alsaaudio.ALSAAudioError:
-        print('Audio device not found - is your microphone connected? Please rerun program')
-        sys.exit()
-    inp.setchannels(1)
-    inp.setrate(16000)
-    inp.setformat(alsaaudio.PCM_FORMAT_S16_LE)
-    inp.setperiodsize(1024)
-    audio = ""
+
+
     l, data = inp.read()
     if l:
         # audio += data
@@ -135,5 +127,16 @@ if __name__ == "__main__": # Run when program is called (won't run if you decide
     token = alexa_helper.gettoken()
     path = os.path.realpath(__file__).rstrip(os.path.basename(__file__))
     os.system('mpg123 -q {}hello.mp3'.format(path, path)) # Say hello!
+    try:
+            inp = alsaaudio.PCM(alsaaudio.PCM_CAPTURE, alsaaudio.PCM_NORMAL, alexa_helper.device)
+    except alsaaudio.ALSAAudioError:
+        print('Audio device not found - is your microphone connected? Please rerun program')
+        sys.exit()
+    inp.setchannels(1)
+    inp.setrate(16000)
+    inp.setformat(alsaaudio.PCM_FORMAT_S16_LE)
+    inp.setperiodsize(1024)
+    audio = ""
+
     event_loop()
     print "\nYou have exited Alexa. I hope that I was useful. To talk to me again just type: python main.py"
