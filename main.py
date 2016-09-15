@@ -108,7 +108,7 @@ def handle_enter(pressed):
 
 # Continually loops for events, if event detected and is the middle joystick button, call upon event handler above
 def event_loop():
-    global audio, inp
+    global audio, inp, frame_rms
     l, data = inp.read()
     if l:
         # audio += data
@@ -117,7 +117,12 @@ def event_loop():
         set_display(loudness) # Set the display to show this "loudness"
         # print "\n Loudness:" + str(loudness)
         rms = sum(numpy.abs([x - a.mean() for x in a])) / 1024
+
+        frame_rms = numpy.delete(numpy.append(frame_rms, rms), 0)
+
         print "\nRMS: " + str(rms)
+        print "\nframe RMS: " + str(frame_rms.mean())
+
         try:
             event_loop()
         except KeyboardInterrupt: # If Ctrl+C pressed, pass back to main body - which then finishes and alerts the user the program has ended
@@ -129,6 +134,9 @@ if __name__ == "__main__": # Run when program is called (won't run if you decide
     token = alexa_helper.gettoken()
     path = os.path.realpath(__file__).rstrip(os.path.basename(__file__))
     os.system('mpg123 -q {}hello.mp3'.format(path, path)) # Say hello!
+
+    global frame_rms
+    frame_rms = numpy.zeros(5)
     try:
             inp = alsaaudio.PCM(alsaaudio.PCM_CAPTURE, alsaaudio.PCM_NORMAL, alexa_helper.device)
     except alsaaudio.ALSAAudioError:
