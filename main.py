@@ -132,7 +132,7 @@ def event_loop():
                 print "\nStart recording"
                 isRecording = True
                 frame_rms = numpy.ones(20) * 1000
-                # audio += data
+                audio += data
         else:
             if frame_rms.mean() < 300:
                 print "\nStop recording..."
