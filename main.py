@@ -125,10 +125,15 @@ def event_loop():
         # print "\nframe RMS: " + str(frame_rms.mean())
         print "\nshort frame RMS: " + str(short_term_rms.mean())
 
-        if frame_rms.mean() > 300:
-            print "\nContinue recording..."
-        else:
+        if short_term_rms.mean() > 400 & (not isRecording) :
+            print "\nStart recording"
+            isRecording = True
+
+        if frame_rms.mean() < 300 & isRecording:
             print "\nStop recording..."
+            isRecording = False
+        # else:
+            # print "\nContinue recording..."
 
         try:
             event_loop()
@@ -142,7 +147,8 @@ if __name__ == "__main__": # Run when program is called (won't run if you decide
     path = os.path.realpath(__file__).rstrip(os.path.basename(__file__))
     os.system('mpg123 -q {}hello.mp3'.format(path, path)) # Say hello!
 
-    global frame_rms, short_term_rms
+    global frame_rms, short_term_rms, isRecording
+    isRecording = False
     frame_rms = numpy.zeros(20)
     short_term_rms = numpy.zeros(3)
     try:
