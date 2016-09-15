@@ -140,8 +140,8 @@ def event_loop():
                 # release_button()
             else:
                 print "\nContinue recording..."
-                print data
-                audio += data
+                # print data
+                # audio += data
 
         try:
             event_loop()
