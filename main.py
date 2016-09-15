@@ -141,7 +141,7 @@ def event_loop():
             else:
                 print "\nContinue recording..."
                 # print data
-                # audio += data
+                audio += data
 
         try:
             event_loop()
