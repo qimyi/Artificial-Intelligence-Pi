@@ -111,7 +111,7 @@ def handle_enter(pressed):
 def event_loop():
     global audio, inp, frame_rms, short_term_rms, isRecording
     l, data = inp.read()
-    if l:
+    if l > 0:
         # audio += data
         # print str(len(data))
         a = numpy.fromstring(data, dtype='int16') # Converts audio data to a list of integers
