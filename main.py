@@ -126,6 +126,7 @@ def event_loop():
         loudness = int(numpy.abs(a).mean()) # Loudness is mean of amplitude of sound wave - average "loudness"
         set_display(loudness) # Set the display to show this "loudness"
         print "\n Loudness:" + str(loudness)
+        inp = None
         event_loop()
 
 if __name__ == "__main__": # Run when program is called (won't run if you decide to import this program)
