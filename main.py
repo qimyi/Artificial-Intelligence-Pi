@@ -128,6 +128,7 @@ def event_loop():
         if (short_term_rms.mean() > 400) & (not isRecording) :
             print "\nStart recording"
             isRecording = True
+            frame_rms = numpy.ones(20) * 1000
 
         if (frame_rms.mean() < 300) & isRecording:
             print "\nStop recording..."
