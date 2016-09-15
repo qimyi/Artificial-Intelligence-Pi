@@ -129,7 +129,7 @@ def event_loop():
             print "\nStart recording"
             isRecording = True
 
-        if frame_rms.mean() < 300 & isRecording:
+        if (frame_rms.mean() < 300) & isRecording:
             print "\nStop recording..."
             isRecording = False
         # else:
