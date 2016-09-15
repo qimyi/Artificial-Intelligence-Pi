@@ -64,9 +64,9 @@ def release_button():
     w.writeframes(audio)
     w.close()
     sense.show_letter("?") # Convert to question mark on display
-    alexa_helper.alexa(sense) # Call upon alexa_helper program (in this directory)
+    # alexa_helper.alexa(sense) # Call upon alexa_helper program (in this directory)
     sense.clear() # Clear display
-    inp = None
+    # inp = None
     audio = ""
 
 # When button is pressed, start recording
@@ -130,12 +130,15 @@ def event_loop():
                 print "\nStart recording"
                 isRecording = True
                 frame_rms = numpy.ones(20) * 1000
+                audio += data
         else:
             if frame_rms.mean() < 300:
                 print "\nStop recording..."
                 isRecording = False
+                release_button()
             else:
                 print "\nContinue recording..."
+                audio += data
 
         try:
             event_loop()
