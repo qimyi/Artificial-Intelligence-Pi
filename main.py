@@ -141,7 +141,7 @@ if __name__ == "__main__": # Run when program is called (won't run if you decide
     os.system('mpg123 -q {}hello.mp3'.format(path, path)) # Say hello!
 
     global frame_rms
-    frame_rms = numpy.zeros(5)
+    frame_rms = numpy.zeros(20)
     try:
             inp = alsaaudio.PCM(alsaaudio.PCM_CAPTURE, alsaaudio.PCM_NORMAL, alexa_helper.device)
     except alsaaudio.ALSAAudioError:
