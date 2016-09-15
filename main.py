@@ -108,11 +108,24 @@ def handle_enter(pressed):
 
 # Continually loops for events, if event detected and is the middle joystick button, call upon event handler above
 def event_loop():
+    global audio, inp
     try:
-        for event in dev.read_loop(): # for each event
-            press_button()
-    except KeyboardInterrupt: # If Ctrl+C pressed, pass back to main body - which then finishes and alerts the user the program has ended
-        pass
+        inp = alsaaudio.PCM(alsaaudio.PCM_CAPTURE, alsaaudio.PCM_NORMAL, alexa_helper.device)
+    except alsaaudio.ALSAAudioError:
+        print('Audio device not found - is your microphone connected? Please rerun program')
+        sys.exit()
+    inp.setchannels(1)
+    inp.setrate(16000)
+    inp.setformat(alsaaudio.PCM_FORMAT_S16_LE)
+    inp.setperiodsize(1024)
+    audio = ""
+    l, data = inp.read()
+    if l:
+        # audio += data
+        a = numpy.fromstring(data, dtype='int16') # Converts audio data to a list of integers
+        loudness = int(numpy.abs(a).mean()) # Loudness is mean of amplitude of sound wave - average "loudness"
+        set_display(loudness) # Set the display to show this "loudness"
+        print "\n Loudness:" + str(loudness)
 
 if __name__ == "__main__": # Run when program is called (won't run if you decide to import this program)
     while alexa_helper.internet_on() == False:
