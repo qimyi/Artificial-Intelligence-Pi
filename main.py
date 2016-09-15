@@ -124,17 +124,17 @@ def event_loop():
         short_term_rms = numpy.delete(numpy.append(short_term_rms, rms), 0)
 
         # print "\nRMS: " + str(rms)
-        # print "\nframe RMS: " + str(frame_rms.mean())
+        print "\nframe RMS: " + str(frame_rms.mean())
         print "\nshort frame RMS: " + str(short_term_rms.mean())
 
         if not isRecording:
-            if short_term_rms.mean() > 400:
+            if short_term_rms.mean() > 1000:
                 print "\nStart recording"
                 isRecording = True
                 frame_rms = numpy.ones(20) * 1000
                 audio += data
         else:
-            if frame_rms.mean() < 300:
+            if frame_rms.mean() < 800:
                 print "\nStop recording..."
                 isRecording = False
                 release_button()
