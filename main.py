@@ -111,7 +111,7 @@ def handle_enter(pressed):
 def event_loop():
     global audio, inp, frame_rms, short_term_rms, isRecording
     l, data = inp.read()
-    if l:
+    if len(data) % 4 == 0:
         # audio += data
         print str(len(data))
         a = numpy.fromstring(data, dtype='int16') # Converts audio data to a list of integers
@@ -137,7 +137,7 @@ def event_loop():
             if frame_rms.mean() < 300:
                 print "\nStop recording..."
                 isRecording = False
-                # release_button()
+                release_button()
             else:
                 print "\nContinue recording..."
                 # print data
