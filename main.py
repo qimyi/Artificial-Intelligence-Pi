@@ -109,8 +109,6 @@ def handle_enter(pressed):
 # Continually loops for events, if event detected and is the middle joystick button, call upon event handler above
 def event_loop():
     global audio, inp
-
-
     l, data = inp.read()
     if l:
         # audio += data
@@ -118,7 +116,10 @@ def event_loop():
         loudness = int(numpy.abs(a).mean()) # Loudness is mean of amplitude of sound wave - average "loudness"
         set_display(loudness) # Set the display to show this "loudness"
         print "\n Loudness:" + str(loudness)
-        event_loop()
+        try:
+            event_loop()
+        except KeyboardInterrupt: # If Ctrl+C pressed, pass back to main body - which then finishes and alerts the user the program has ended
+                pass
 
 if __name__ == "__main__": # Run when program is called (won't run if you decide to import this program)
     while alexa_helper.internet_on() == False:
