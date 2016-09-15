@@ -55,7 +55,7 @@ def set_display(loudness):
 
 # When button is released, audio recording finishes and sent to Amazon's Alexa service
 def release_button():
-    print "\nCalles release button"
+    print "\nCalled release button"
     global audio, inp
     sense.set_pixels([[0,0,0]]*64)
     w = wave.open(path+'recording.wav', 'w') # This and following lines saves voice to .wav file
@@ -125,7 +125,7 @@ def event_loop():
 
         # print "\nRMS: " + str(rms)
         # print "\nframe RMS: " + str(frame_rms.mean())
-        # print "\nshort frame RMS: " + str(short_term_rms.mean())
+        print "\nshort frame RMS: " + str(short_term_rms.mean())
 
         if not isRecording:
             if short_term_rms.mean() > 400:
