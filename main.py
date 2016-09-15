@@ -115,7 +115,9 @@ def event_loop():
         a = numpy.fromstring(data, dtype='int16') # Converts audio data to a list of integers
         loudness = int(numpy.abs(a).mean()) # Loudness is mean of amplitude of sound wave - average "loudness"
         set_display(loudness) # Set the display to show this "loudness"
-        print "\n Loudness:" + str(loudness)
+        # print "\n Loudness:" + str(loudness)
+        rms = sum(numpy.abs([x - a.mean() for x in a]))
+        print "\nRMS: " + str(rms)
         try:
             event_loop()
         except KeyboardInterrupt: # If Ctrl+C pressed, pass back to main body - which then finishes and alerts the user the program has ended
