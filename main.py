@@ -119,6 +119,7 @@ def event_loop():
         rms = sum(numpy.abs([x - a.mean() for x in a])) / 1024
 
         frame_rms = numpy.delete(numpy.append(frame_rms, rms), 0)
+        short_term_rms = numpy.delete(numpy.append(short_term_rms, rms), 0)
 
         # print "\nRMS: " + str(rms)
         # print "\nframe RMS: " + str(frame_rms.mean())
