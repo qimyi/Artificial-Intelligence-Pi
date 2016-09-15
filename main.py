@@ -109,7 +109,8 @@ def handle_enter(pressed):
 # Continually loops for events, if event detected and is the middle joystick button, call upon event handler above
 def event_loop():
     try:
-        press_button()
+        for event in dev.read_loop(): # for each event
+            press_button()
     except KeyboardInterrupt: # If Ctrl+C pressed, pass back to main body - which then finishes and alerts the user the program has ended
         pass
 
