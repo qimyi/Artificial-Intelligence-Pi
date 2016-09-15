@@ -65,7 +65,7 @@ def release_button():
     w.writeframes(audio)
     w.close()
     sense.show_letter("?") # Convert to question mark on display
-    # alexa_helper.alexa(sense) # Call upon alexa_helper program (in this directory)
+    alexa_helper.alexa(sense) # Call upon alexa_helper program (in this directory)
     sense.clear() # Clear display
     # inp = None
     audio = ""
@@ -113,7 +113,7 @@ def event_loop():
     l, data = inp.read()
     if (len(data) % 4 == 0) & (len(data) > 0):
         # audio += data
-        print str(len(data))
+        # print str(len(data))
         a = numpy.fromstring(data, dtype='int16') # Converts audio data to a list of integers
         loudness = int(numpy.abs(a).mean()) # Loudness is mean of amplitude of sound wave - average "loudness"
         set_display(loudness) # Set the display to show this "loudness"
