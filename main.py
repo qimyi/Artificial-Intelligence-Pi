@@ -154,7 +154,8 @@ if __name__ == "__main__": # Run when program is called (won't run if you decide
     path = os.path.realpath(__file__).rstrip(os.path.basename(__file__))
     os.system('mpg123 -q {}hello.mp3'.format(path, path)) # Say hello!
 
-    global frame_rms, short_term_rms, isRecording
+    global frame_rms, short_term_rms, isRecording, audio
+    audio = ""
     isRecording = False
     frame_rms = numpy.zeros(20)
     short_term_rms = numpy.zeros(3)
